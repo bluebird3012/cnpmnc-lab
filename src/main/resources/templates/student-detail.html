@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Chi tiết sinh viên</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            width: 400px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .info-row {
+            margin-bottom: 15px;
+        }
+
+        .label {
+            font-weight: bold;
+        }
+
+        .value {
+            margin-left: 5px;
+        }
+
+        .text-danger {
+            color: red;
+        }
+
+        .btn-edit,
+        .btn-delete,
+        .btn-back {
+            display: block;
+            text-align: center;
+            margin-top: 10px;
+            padding: 8px;
+            border-radius: 5px;
+        }
+
+        .btn-edit,
+        .btn-delete {
+            color: white;
+            text-decoration: none;
+        }
+
+        .btn-back {
+            color: black;
+        }
+
+        .btn-edit {
+            background-color: #28a745;
+        }
+
+        .btn-edit:hover {
+            background-color: #1e7e34;
+        }
+
+        .btn-delete {
+            background-color: #dc3545;
+            border: none;
+            width: 100%;
+            cursor: pointer;
+        }
+
+        .btn-delete:hover {
+            background-color: #bd2130;
+        }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h2>Chi tiết sinh viên</h2>
+
+    <div class="info-row">
+        <span class="label">Mã sinh viên:</span>
+        <span class="value" th:text="${student.id}"></span>
+    </div>
+
+    <div class="info-row">
+        <span class="label">Họ tên:</span>
+        <span class="value" th:text="${student.name}"></span>
+    </div>
+
+    <div class="info-row">
+        <span class="label">Email:</span>
+        <span class="value" th:text="${student.email}"></span>
+    </div>
+
+    <div class="info-row"
+         th:classappend="${student.age < 18} ? 'text-danger'">
+        <span class="label">Tuổi:</span>
+        <span class="value" th:text="${student.age}"></span>
+        <span th:if="${student.age < 18}">(Chưa đủ 18 tuổi)</span>
+    </div>
+
+    <div>
+        <!-- Nút chỉnh sửa -->
+        <a th:href="@{/students/edit/{id}(id=${student.id})}"
+           class="btn-edit">
+            Chỉnh thông tin
+        </a>
+
+        <!-- Nút xóa -->
+        <form th:action="@{/students/delete/{id}(id=${student.id})}"
+              method="post"
+              style="display:inline;">
+            <button type="submit"
+                    class="btn-delete"
+                    onclick="return confirm('Bạn có chắc muốn xóa sinh viên này?')">
+                Xóa
+            </button>
+        </form>
+        <a href="/students" class="btn-back">
+            Quay lại danh sách
+        </a>
+    </div>
+</div>
+
+</body>
+</html>

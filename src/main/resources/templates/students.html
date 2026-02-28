@@ -1,52 +1,65 @@
-<!doctype html>
-<html xmlns:th="http://www.thymeleaf.org">
-  <!-- Khai bao namespace de dung th:* -->
-  <head>
-    <meta charset="UTF-8" />
-    <title>Danh Sach Sinh Vien</title>
-    <!-- CSS don gian -->
-    <style>
-      body {
-        font-family: sans-serif;
-        padding: 20px;
-      }
-      table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 20px;
-      }
-      th,
-      td {
-        border: 1px solid #ddd;
-        padding: 8px;
-        text-align: left;
-      }
-      th {
-        background-color: #f2f2f2;
-      }
-    </style>
-  </head>
-  <body>
-    <h1>Danh Sach Sinh Vien (SSR)</h1>
-    <table>
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Ho va Ten</th>
-          <th>Email</th>
-          <th>Tuoi</th>
-        </tr>
-      </thead>
-      <tbody>
-        <!-- Cu phap Thymeleaf: Duyet qua danh sach "dsSinhVien" -->
-        <!-- th:each="bien_tam : ${key_trong_model}" -->
-        <tr th:each="student : ${dsSinhVien}">
-          <td th:text="${student.id}">ID Mau</td>
-          <td th:text="${student.name}">Ten Mau</td>
-          <td th:text="${student.email}">Email Mau</td>
-          <td th:text="${student.age}">0</td>
-        </tr>
-      </tbody>
-    </table>
-  </body>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"> <!-- Khai bao namespace de dung th:* -->
+<head>
+  <meta charset="UTF-8">
+  <title>Danh Sach Sinh Vien</title>
+  <!-- CSS don gian -->
+  <style>
+    body { font-family: sans-serif; padding: 20px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+    th { background-color: #f2f2f2; }
+    .text-danger { color: red; }
+    .text-center { text-align: center }
+    .col {
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+    }
+  </style>
+</head>
+<body>
+<div class="col">
+  <form action="/students" method="GET">
+    <label>
+      <input type="text" name="keyword" placeholder="Nhap ten..." />
+    </label>
+    <button type="submit">Tim</button>
+  </form>
+  <div>
+    <button type="button"
+            th:onclick="|window.location.href='@{/students/add}'|">
+      Thêm sinh viên
+    </button>
+  </div>
+</div>
+<h1>Danh Sach Sinh Vien (SSR)</h1>
+<table>
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>Ho va Ten</th>
+    <th>Email</th>
+    <th>Tuoi</th>
+    <th class="text-center">Chi tiet</th>
+  </tr>
+  </thead>
+  <tbody>
+  <!-- Cu phap Thymeleaf: Duyet qua danh sach "dsSinhVien" -->
+  <!-- th:each="bien_tam : ${key_trong_model}" -->
+  <tr th:each="student : ${dsSinhVien}"
+      th:classappend="${student.age < 18} ? 'text-danger' : ''">
+    <td th:text="${student.id}">ID Mau</td>
+    <td th:text="${student.name}">Ten Mau</td>
+    <td th:text="${student.email}">Email Mau</td>
+    <td th:text="${student.age}">0</td>
+    <td class="text-center">
+      <a th:href="@{/students/{id}(id=${student.id})}">
+        Xem chi tiết
+      </a>
+    </td>
+  </tr>
+  </tbody>
+</table>
+</body>
 </html>
