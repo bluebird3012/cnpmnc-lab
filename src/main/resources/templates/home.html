@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Welcome</title>
+    <meta charset="UTF-8">
+
+    <!-- Auto redirect after 3 seconds -->
+    <meta http-equiv="refresh" content="3;url=/students" />
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 100px;
+            background-color: #f4f6f8;
+        }
+        h1 {
+            color: #2c3e50;
+        }
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        a:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Welcome to Student Management System 🎓</h1>
+<p>You will be redirected to the student list shortly...</p>
+
+<a th:href="@{/students}">Go to Students Now</a>
+
+</body>
+</html>
