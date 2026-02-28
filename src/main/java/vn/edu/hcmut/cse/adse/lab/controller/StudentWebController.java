@@ -17,11 +17,6 @@ public class StudentWebController {
     @Autowired
     private StudentService service;
 
-    @GetMapping("/")
-    public String home() {
-        return "home"; // returns home.html
-    }
-
     @GetMapping
     public String getAllStudents(@RequestParam(required = false) String keyword, Model model) {
         List<Student> students;
