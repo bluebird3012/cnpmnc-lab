@@ -61,4 +61,7 @@ jdbc:postgresql://aws-1-ap-northeast-1.pooler.supabase.com:5432/postgres
 
      SQLite không báo lỗi và vẫn cho phép thành công. Nguyên nhân là do câu lệnh DDL khởi tạo bảng `students` thiếu ràng buộc `NOT NULL` ở cột `name` (`name TEXT`). Khi Spring Data JPA thực hiện ORM (Object-Relational Mapping) để kéo bản ghi này lên bộ nhớ, thuộc tính `name` của đối tượng `Student` sẽ bị gán thành `null`. Bất kỳ lời gọi hàm nào can thiệp vào thuộc tính này đều sẽ kích hoạt ngoại lệ **`NullPointerException` (NPE)** tại thời điểm Runtime (Runtime Exception), làm crash luồng thực thi và trả về lỗi HTTP 500 Internal Server Error cho Client.
 
-- ### Screenshot module Lab 4
+  3. See more details in answers_and_screenshot.docx.
+
+- ### Screenshot for Lab 4 Module
+  See answers_and_screenshot.docx.
