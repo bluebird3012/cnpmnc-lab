@@ -7,7 +7,48 @@
 
 - ### Public URL: https://cnpmnc-lab-a9wk.onrender.com/
 
+- ### Giới thiệu
+
+    Ứng dụng sử dụng cơ sở dữ liệu PostgreSQL được lưu trữ trên Supabase và kết nối thông qua Supabase Session Pooler để quản lý kết nối cơ sở dữ liệu một cách hiệu quả.
+    
+    Thông tin cấu hình và tài khoản database được cung cấp thông qua các biến môi trường, bao gồm:
+    
+    POSTGRES_DB_URL
+    
+    POSTGRES_USER
+    
+    POSTGRES_PASSWORD
+    
+    
+    Cách làm này giúp đảm bảo tính bảo mật và linh hoạt khi triển khai ở nhiều môi trường khác nhau như môi trường phát triển cục bộ (local) hoặc các nền tảng đám mây (cloud).
+
 - ### Hướng dẫn chạy dự án
+
+1. Clone repository
+   git clone https://github.com/bluebird3012/cnpmnc-lab.git
+   cd cnpmnc-lab
+2. Build Docker image
+
+Đảm bảo rằng Docker đã được cài đặt và đang chạy trên máy của bạn.
+
+docker build -t student-management .
+3. Chạy Docker container
+   docker run -p 8080:8080 \
+   -e POSTGRES_DB_URL=db_url \
+   -e POSTGRES_USER=db_username \
+   -e POSTGRES_PASSWORD=db_password \
+   -e PORT=8080 \
+   student-management
+4. Truy cập ứng dụng
+
+Sau khi container khởi động thành công, mở trình duyệt và truy cập:
+
+http://localhost:8080
+
+Lưu ý
+POSTGRES_DB_URL phải có định dạng như sau:
+
+jdbc:postgresql://aws-1-ap-northeast-1.pooler.supabase.com:5432/postgres
 
 - ### Trả lời câu hỏi lý thuyết Lab
   1. **Tại sao Database lại chặn thao tác Insert trùng ID và báo lỗi `UNIQUE constraint failed`?**
